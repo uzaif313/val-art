@@ -1,0 +1,2 @@
+module Arts::PublishHelper
+end

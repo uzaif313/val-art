@@ -1,0 +1,8 @@
+var caption = <%=@art.is_publish%> ? "Unpublish" : "Publish"
+var css_class = <%=@art.is_publish%> ? "btn btn-danger btn-xs " : "btn btn-success btn-xs"
+var id = "#art-<%=@art.id%>";
+var element = $(id)
+element.text(caption)
+element.attr("data-publish",<%=!@art.is_publish%>)
+element.attr("class",css_class)
+$("button#art-<%=@art.id%>").text(caption)

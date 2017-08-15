@@ -1,0 +1,11 @@
+<%= simple_form_for @event, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :art_id, collection:art_collection, include_blank:"Select Option" %>
+  <%= f.input :start_time %>
+  <%= f.input :end_time %>
+  <%= f.input :event_type, collection:Event.event_types,include_blank:"Select Option" %>
+  
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                events_path, :class => 'btn btn-default' %>
+<% end %>

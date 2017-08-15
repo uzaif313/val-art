@@ -1,0 +1,23 @@
+<div class="form-group">
+	<%=form_tag calendar_index_path, method: :get,remote:true do %>
+	<div class="row">
+		<div class="col-md-6">
+			<strong>Event Type</strong>
+		</div>		
+		<div class="col-md-6">
+			<strong>Date</strong>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<%=select_tag :event_type,options_for_select(Event.event_types),class:"form-control",id:"event_type"%>
+		</div>		
+		<div class="col-md-6">
+			<%=text_field_tag :date_range,'',class:"form-control",id:"date_range" %>
+		</div>		
+	</div>
+	<%end%>
+</div>
+<div class="calendar">
+	<%= content_tag(:div,'', "data-event":@calendar, id:"events" ) %>
+</div>

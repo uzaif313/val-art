@@ -1,0 +1,8 @@
+<%= simple_form_for @art, html: { class: 'form' } do |f| %>
+  <%= f.input :image %>
+  <%= f.input :descrption %>
+  
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                arts_path, :class => 'btn btn-default' %>
+<% end %>

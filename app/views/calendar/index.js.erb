@@ -1,0 +1,3 @@
+var events = <%= raw @calendar%>;
+$("#events").fullCalendar('removeEvents')
+$("#events").fullCalendar('addEventSource', events)

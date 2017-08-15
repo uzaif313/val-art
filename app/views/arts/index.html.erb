@@ -1,0 +1,51 @@
+<%- model_class = Art -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped arts">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:image_file_name) %></th>
+      <th><%= model_class.human_attribute_name(:image_content_type) %></th>
+      <th><%= model_class.human_attribute_name(:image_file_size) %></th>
+      <th><%= model_class.human_attribute_name(:image_updated_at) %></th>
+      <th><%= model_class.human_attribute_name(:users_id) %></th>
+      <th><%= model_class.human_attribute_name(:descrption) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @arts.each do |art| %>
+      <tr>
+        <td><%= link_to art.id, art_path(art) %></td>
+        <td><%= art.image_file_name %></td>
+        <td><%= art.image_content_type %></td>
+        <td><%= art.image_file_size %></td>
+        <td><%= art.image_updated_at %></td>
+        <td><%= art.user.email %></td>
+        <td><%= art.descrption %></td>
+        <td><%= art.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      art_path(art), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_art_path(art), :class => 'btn btn-default btn-xs' if policy(art).edit? %>
+          <%if Arts::PublishPolicy.new(current_user, art).update? %>
+            <button class="btn btn-success btn-xs" id="art-<%=art.id%>"  data-link="<%=art_publish_index_path(art)%>"  data-publish="<%=art.is_publish%>" data-type="publish">Publish</button>
+          <%end%> 
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      art_path(art),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' if policy(art).destroy?%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_art_path,
+            :class => 'btn btn-primary' if policy(Art).new? %>
