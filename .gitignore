@@ -17,3 +17,4 @@
 .byebug_history
 /tmp
 /public
+/node_modules
